@@ -1,5 +1,15 @@
 # NU-Wild-Rabbit
 
+## Example Matrix
+```python
+import numpy as np
+
+example_maze = np.mat([[3, 2, 2, 1],
+                       [1, 2, 1, 1],
+                       [2, 2, 2, 2],
+                       [4, 1, 2, 2]])
+```
+
 ## Pre-defiend Data Structue
 The maze is defiend as a 2D matrix in numpy. Each element in this matrix is a int number. Here's the corresponding states for different numbers:
 * 1: Wall
