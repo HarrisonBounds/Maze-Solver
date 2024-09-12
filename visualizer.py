@@ -4,16 +4,15 @@ import matplotlib.colors as mcolors
 
 
 class MazeVisualizer:
-    def __init__(self, mazes):
-        self.mazes = mazes
+    def __init__(self):
         # Define a discrete colormap
         self._colors = ['black', 'white', 'green', 'red', 'blue', 'grey', 'yellow', 'purple']
         self._cmap = mcolors.ListedColormap(self._colors)
         self._bounds = [0, 1.5, 2.5, 3.5, 4.5, 5.5, 6.6, 7.5, 8.5]  # Define boundaries for each color
         self._norm = mcolors.BoundaryNorm(self._bounds, self._cmap.N)
         
-    def play(self, interval=1.5):
-        for maze in self.mazes:
+    def play(self, mazes, interval=1.5):
+        for maze in mazes:
             plt.imshow(maze, cmap=self._cmap, norm=self._norm, interpolation='nearest')
             plt.pause(interval) # seconds
             
@@ -36,5 +35,5 @@ if __name__ == "__main__":
     mazes_to_play = [example_maze, end_maze]
     
     # visualizing the mazes
-    vis = MazeVisualizer(mazes_to_play)
-    vis.play(interval=2.0)
+    vis = MazeVisualizer()
+    vis.play(mazes_to_play, interval=2.0)
