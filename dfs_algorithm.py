@@ -15,6 +15,11 @@ visited = []
 '''
 print("STARTING EXAMPLE MAZE", example_maze)
 
+def planner():
+    #  pls send the final output as a return type here.
+    #  let me know if you need any current value to your file.
+    print("demo")
+
 def dfs(example_maze, row, col, cur):
         
         
