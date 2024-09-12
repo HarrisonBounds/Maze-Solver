@@ -28,6 +28,7 @@ class MazeSolver:
         self._track_succeed = False
         self._count = 0
         self.path = []
+        self.interval = 0.1
         
         self.vis = MazeVisualizer()
     
@@ -55,7 +56,7 @@ class MazeSolver:
     def search(self):
         # Check if it's near the goal
         # print(self._maze[self._current_m_idx, self._current_n_idx])
-        self.vis.display_single_state(self._maze, 0.5)
+        self.vis.display_single_state(self._maze, self.interval)
         # print(self._current_m_idx, self._current_n_idx)
         neighbours = self._generate_visiting_idx(self._current_m_idx, self._current_n_idx)
         for neighbour in neighbours:
@@ -129,9 +130,10 @@ class MazeSolver:
             self._maze[idx[0], idx[1]] = 7
         self.vis.display_single_state(self._maze, 2.0)
         
-                    
-rg = RandomGenerator(dim_m=6, dim_n=6)
-maze = rg.generate_random_maze()
-        
-ms = MazeSolver(maze)
-ms.solve_maze_recursive()
+
+if __name__ == "__main__":        
+    rg = RandomGenerator(dim_m=20, dim_n=20)
+    maze = rg.generate_random_maze()
+            
+    ms = MazeSolver(maze)
+    ms.solve_maze_recursive()
