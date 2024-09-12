@@ -204,6 +204,8 @@ class BFSMazeSolver:
                 else:
                     if(self._maze[current_position[0], current_position[1]] == 2):
                         self._maze[current_position[0], current_position[1]] = 5
+                        self._track[current_position[0], current_position[1]] = self._count
+                        self._count += 1
                         self.vis.display_single_state(self._maze, self.interval)
                         
                         
@@ -225,8 +227,34 @@ class BFSMazeSolver:
                     self._maze[bfscache[0][0], bfscache[0][1]] = 6
                 self.bfscache.pop(0)
             # print(self.bfscache)
+            # print(self._track)
                     
-                    
+    def get_shortest_path(self):
+        neighbours = self._generate_visiting_idx(self._current_m_idx, self._current_n_idx)
+        for neighbour in neighbours:
+            if(self._is_idx_out_of_boundary(neighbour[0], neighbour[1])):
+                pass
+            else:
+                if(self._maze[neighbour[0], neighbour[1]] == 3):
+                    self._track_succeed = True
+                              
+        minimum_val = np.inf
+        minimum_idx = [self._current_m_idx, self._current_n_idx]
+        neighbours = self._generate_visiting_idx(self._current_m_idx, self._current_n_idx)
+        if(self._track_succeed == False):
+            for neighbour in neighbours:
+                if(self._is_idx_out_of_boundary(neighbour[0], neighbour[1])):
+                    pass
+                else:
+                    if(self._track[neighbour[0], neighbour[1]] < minimum_val and self._track[neighbour[0], neighbour[1]] > 0):
+                        minimum_val = self._track[self._current_m_idx, self._current_n_idx]
+                        minimum_idx = [neighbour[0], neighbour[1]]
+            self.path.append(minimum_idx)
+    
+            self._current_m_idx = minimum_idx[0]
+            self._current_n_idx = minimum_idx[1]
+            self.get_shortest_path()
+                  
     def solve_maze_recursive(self):     
         self._current_m_idx = self.start_m_idx
         self._current_n_idx = self.start_n_idx
@@ -234,6 +262,14 @@ class BFSMazeSolver:
         while(self._succeed == False):
         # for i in range(5):
             self.bfssearch()
+            
+        self._current_m_idx = self.goal_m_idx
+        self._current_n_idx = self.goal_n_idx
+        
+        self.get_shortest_path()
+        for idx in self.path:
+            self._maze[idx[0], idx[1]] = 7
+        self.vis.display_single_state(self._maze, 2.0)
         
 if __name__ == "__main__":        
     rg = RandomGenerator(dim_m=30, dim_n=30)
