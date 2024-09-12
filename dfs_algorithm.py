@@ -13,6 +13,12 @@ example_maze = [[3, 2, 2, 1],
 4: Goal
 '''
 
+# Main solver
+def planner():
+    #  pls send the final output as a return type here.
+    #  let me know if you need any current value to your file.
+    print("demo")
+
 
 def dfs(east, south, west, north):
         if east == 2:
