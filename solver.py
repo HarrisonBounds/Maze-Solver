@@ -27,7 +27,7 @@ class DFSMazeSolver:
         self._recorded_states = []
         self._succeed = False
         self._track_succeed = False
-        self._count = 0
+        self._count = 1
         self.path = []
         self.interval = 0.1
         
@@ -109,6 +109,8 @@ class DFSMazeSolver:
                         minimum_val = self._track[self._current_m_idx, self._current_n_idx]
                         minimum_idx = [neighbour[0], neighbour[1]]
             self.path.append(minimum_idx)
+            self._maze[minimum_idx[0], minimum_idx[1]] = 7
+            self.vis.display_single_state(self._maze, self.interval)
     
             self._current_m_idx = minimum_idx[0]
             self._current_n_idx = minimum_idx[1]
@@ -119,7 +121,7 @@ class DFSMazeSolver:
         self._current_n_idx = self.start_n_idx
         self.search()
         
-        print(self._track)
+        # print(self._track)
         # self.vis.display_single_state(self._maze, 5.0)
         
         self._current_m_idx = self.goal_m_idx
@@ -155,9 +157,9 @@ class BFSMazeSolver:
         self._recorded_states = []
         self._succeed = False
         self._track_succeed = False
-        self._count = 0
+        self._count = 1
         self.path = []
-        self.interval = 0.1
+        self.interval = 0.05
         
         self.bfscache = []
         
@@ -237,9 +239,10 @@ class BFSMazeSolver:
             else:
                 if(self._maze[neighbour[0], neighbour[1]] == 3):
                     self._track_succeed = True
-                              
+                    
         minimum_val = np.inf
         minimum_idx = [self._current_m_idx, self._current_n_idx]
+    
         neighbours = self._generate_visiting_idx(self._current_m_idx, self._current_n_idx)
         if(self._track_succeed == False):
             for neighbour in neighbours:
@@ -250,10 +253,13 @@ class BFSMazeSolver:
                         minimum_val = self._track[self._current_m_idx, self._current_n_idx]
                         minimum_idx = [neighbour[0], neighbour[1]]
             self.path.append(minimum_idx)
+            self._maze[minimum_idx[0], minimum_idx[1]] = 7
+            self.vis.display_single_state(self._maze, self.interval)
     
             self._current_m_idx = minimum_idx[0]
             self._current_n_idx = minimum_idx[1]
             self.get_shortest_path()
+            
                   
     def solve_maze_recursive(self):     
         self._current_m_idx = self.start_m_idx
@@ -265,14 +271,14 @@ class BFSMazeSolver:
             
         self._current_m_idx = self.goal_m_idx
         self._current_n_idx = self.goal_n_idx
-        
+        # print(self._track)
         self.get_shortest_path()
         for idx in self.path:
             self._maze[idx[0], idx[1]] = 7
         self.vis.display_single_state(self._maze, 2.0)
         
 if __name__ == "__main__":        
-    rg = RandomGenerator(dim_m=30, dim_n=30)
+    rg = RandomGenerator(dim_m=20, dim_n=20)
     maze = rg.generate_random_maze()
             
     # dfsms = DFSMazeSolver(maze)
