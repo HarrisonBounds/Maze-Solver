@@ -16,6 +16,11 @@ class MazeVisualizer:
         for maze in self.mazes:
             plt.imshow(maze, cmap=self._cmap, norm=self._norm, interpolation='nearest')
             plt.pause(interval) # seconds
+            
+    def display_single_state(self, maze, interval=1.0):
+        plt.imshow(maze, cmap=self._cmap, norm=self._norm, interpolation='nearest')
+        plt.pause(interval) # seconds
+        
 
 
 if __name__ == "__main__":
