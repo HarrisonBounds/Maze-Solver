@@ -1,6 +1,6 @@
 
 import dfs_algorithm as dfs
-import visualiser as viz
+import visualizer as viz
 
 def updatePos():
     print("demo")
@@ -16,11 +16,14 @@ def readMap():
 running = True
 while (running):
 
-    readMap()   
-    dfs.planner()
-    x,y = updatePos()
-    viz.currentVal(x,y)
-    # viz.displayMaz() confirm operation.
+    # intialState = readMap() 
+    # dfs.init(intialState)
+    currentMazeState = dfs.planner() #2-D numpy array.
+    # x,y = updatePos()
+    visulalizer = viz.MazeVisualizer(currentMazeState)
+    visulalizer.display_single_state(currentMazeState)
+    visulalizer.play(interval=2.0)
+
     displayDebugStat()
 
 
