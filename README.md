@@ -1,9 +1,9 @@
 # NU-Wild-Rabbit
 
 ## Run Han's Demo
+You can specify using BFS or DFS in [integrate.py](https://github.com/HarrisonBounds/Maze-Solver/blob/han/integrate.py)
 ```sh
 python3 integrate.py
-# You can specify BFS or DFS in the python script
 ```
 
 ## Example Matrix
