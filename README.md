@@ -1,5 +1,11 @@
 # NU-Wild-Rabbit
 
+## Run Han's Demo
+```sh
+python3 integrate.py
+# You can specify BFS or DFS in the python script
+```
+
 ## Example Matrix
 ```python
 import numpy as np
