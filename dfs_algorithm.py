@@ -19,6 +19,9 @@ def planner():
     #  let me know if you need any current value to your file.
     print("demo")
 
+# Initalising func.
+def init(intialState):
+    initialState = intialState
 
 def dfs(east, south, west, north):
         if east == 2:
