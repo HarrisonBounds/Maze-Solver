@@ -1,51 +1,95 @@
-import numpy as np
-
 example_maze = [[3, 2, 2, 1],
                 [1, 2, 1, 1],
                 [2, 2, 2, 2],
                 [4, 2, 2, 2]]
 
+visited = []
 
 '''
 1: Wall
 2: Free
 3: Start
 4: Goal
+7: Visited
+8: Already visited
 '''
+print("STARTING EXAMPLE MAZE", example_maze)
 
-
-def dfs(east, south, west, north):
-        if east == 2:
-            return "east"
-        elif south == 2:
-            return "south"
-        elif west == 2:
-             return "west"
-        elif north == 2:
-            return "north"
+def dfs(example_maze, row, col, cur):
         
-        #elif east == 1 or south == 1 or west == 1 or north == 1:
+        
+        #Bounds checking, and exploring the spaces around the current position
+        if col+1 < len(example_maze):
+            east = cur
+
+            if example_maze[row][col+1] == 2:
+                example_maze[row][col+1] = 7
+                visited.append(east)
+                return
+
+        if row+1 < len(example_maze):
+             south = example_maze[row+1][col]
+
+             if south == 2:
+                  example_maze[row+1][col] = 7
+                  cur = (row+1, col)
+                  visited.append(cur)
+                  return
+        if col-1 >= 0:
+             west = (row, col-1)
+
+             if example_maze[row][col-1] == 2:
+                example_maze[row][col-1] = 7
+                cur = (row, col-1)
+                visited.append(cur)
+                return
+            
+             if west in visited:
+                  example_maze[row][col] = 8
+                  
+                  
+                  
+                  
+
+        if row-1 >= 0:
+            north = example_maze[row-1][col] = 7
+
+            if north == 2:
+                 example_maze[row-1][col] = 7
+                 cur = (row-1, col)
+                 visited.append(cur)
+                 return
+
+        if cur in visited:
+            example_maze[row][col] = 8
+        
+
+            
+        
+             
+             
+        
              
 for row in range(len(example_maze)):
     for col in range(len(example_maze)):
-        current = example_maze[row][col]
 
-        #Get state of maze
-        east = example_maze[row][col+1]
-        south = example_maze[row+1][col]
-        west = example_maze[row][col-1]
-        north = example_maze[row-1][col]
+        
+        cur = (row, col)
+        dfs(example_maze, row, col, cur)
 
-        direction = dfs(east, south, west, north)
 
-        if direction == 'east':
-            example_maze[row][col+1] = 7
-        elif direction == 'south':
-             example_maze[row+1][col] = 7
-        elif direction == "west":
-             example_maze[row][col-1]
-        elif direction == "north":
-             example_maze[row-1][col]
+
+        # if direction == 'east':
+        #     example_maze[row][col+1] = 7
+        # elif direction == 'south':
+        #      example_maze[row+1][col] = 7
+        # elif direction == "west":
+        #      example_maze[row][col-1] = 7
+        # elif direction == "north":
+        #      example_maze[row-1][col] = 7
+
+print("SOLVED EXAMPLE MAZE:", example_maze)
+
 
 
            
