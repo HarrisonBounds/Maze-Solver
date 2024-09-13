@@ -30,7 +30,7 @@ class MazeSolver():
         
     def create_relationships(self):
         maze_size = len(self.maze)
-        for row in range (2,3):
+        for row in range (1,2):
         # for row in range (maze_size):
             for col in range (maze_size):
 
