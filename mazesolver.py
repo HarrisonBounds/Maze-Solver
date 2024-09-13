@@ -8,6 +8,8 @@ class Square():
         self.y = y
         self.isWall = isWall
         self.visited = False
+        self.isStart = False
+        self.isGoal = False
         self.neighbor_list = []
 
     def get_neighbors(self):
@@ -35,13 +37,25 @@ class MazeSolver():
                 if square_val != 1: # only add neighbors for valid squares
                     square = Square(square_val, row, col, square_val == 1)
 
+                    if square_val == 99: # START square
+                        square.isStart = True
+                        self.cur_path.append(square) 
+                        self.sln_path.append(square)
+                    
+                    if square_val == 100: # GOAL square
+                        square.isGoal = True
+
                     for item in dirs:
                         new_row, new_col =  row + item[0], col + item[1] # AI Citation
                         if (self.is_valid_move(new_row, new_col)):
                             neigh_val = self.maze[new_row][new_col]
                             if neigh_val != 1: # not a wall
-                                square.neighbor_list.append(Square(neigh_val, new_row, new_col, False))
-                    # self.square_list.append(square) KEYYYYYYYYYYY
+                                neigh = Square(neigh_val, new_row, new_col, False)
+                                if neigh_val == 100: # GOAL square
+                                    neigh.isGoal = True
+                                square.neighbor_list.append(neigh)
+
+
 
     # def display_relationships(self):
     #     for square in self.square_list:
@@ -49,15 +63,15 @@ class MazeSolver():
     #         for neigh in square.neighbor_list:
     #             print(neigh.val)
 
-    # def dfs(self):
-    #     start_row, start_col = 0, 0
-    #     start_squ_val = 99
-    #     maze_size = len(self.maze)
-    #     self.dfs_list.append(square_val, start_row, start_col, start_squ_val)
+    def dfs(self):
+        start_row, start_col = 0, 0
+        start_squ_val = 99
+        maze_size = len(self.maze)
+        self.dfs_list.append(square_val, start_row, start_col, start_squ_val)
 
-    #     for row in range (maze_size):
-    #         for col in range (maze_size):
-    #             square_val = self.maze[row][col]
+        for row in range (maze_size):
+            for col in range (maze_size):
+                square_val = self.maze[row][col]
 
 
 example_maze = [[99, 0, 0, 1],
