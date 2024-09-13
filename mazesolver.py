@@ -17,9 +17,10 @@ class Square():
 class MazeSolver():
     def __init__(self, maze):
         self.maze = maze
-        self.square_list = []
+        # self.square_list = []
         self.cur_path = []
         self.sln_path = []
+        self.dfs_list = []
         
     def is_valid_move(self, row, col):
         if row < len(self.maze) and row >= 0 and col < len(self.maze) and col >= 0: # within bounds
@@ -39,17 +40,25 @@ class MazeSolver():
                         if (self.is_valid_move(new_row, new_col)):
                             neigh_val = self.maze[new_row][new_col]
                             if neigh_val != 1: # not a wall
-                                square.neighbor_list.append(Square(neigh_val, row, col, False))
-                    self.square_list.append(square)
+                                square.neighbor_list.append(Square(neigh_val, new_row, new_col, False))
+                    # self.square_list.append(square) KEYYYYYYYYYYY
 
-    def display_relationships(self):
-        for square in self.square_list:
-            print(square.val,":")
-            for neigh in square.neighbor_list:
-                print(neigh.val)
+    # def display_relationships(self):
+    #     for square in self.square_list:
+    #         print(square.val,":")
+    #         for neigh in square.neighbor_list:
+    #             print(neigh.val)
 
-    def dfs(self):
-        return
+    # def dfs(self):
+    #     start_row, start_col = 0, 0
+    #     start_squ_val = 99
+    #     maze_size = len(self.maze)
+    #     self.dfs_list.append(square_val, start_row, start_col, start_squ_val)
+
+    #     for row in range (maze_size):
+    #         for col in range (maze_size):
+    #             square_val = self.maze[row][col]
+
 
 example_maze = [[99, 0, 0, 1],
                 [1, 0, 1, 1],

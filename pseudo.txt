@@ -42,3 +42,11 @@ def dfs (cur)
     remove cur_square from cur_path                   // COLOR
     remove cur_square from sln_path
     return false
+
+dfs list
+    append cur
+        mark as visited
+        add to cur_path
+        add to sln_path
+        append n of cur
+            append nn of n of cur
