@@ -1,0 +1,17 @@
+
+cur square
+if within bounds
+check next square over in each direction (    
+    EAST
+    SOUTH
+    WEST
+    NORTH):
+
+if it's free, move in that direction (aka move_towards_dir)
+for example, EAST
+keep moving EAST
+if hit a wall, 
+    mark 1 before wall as UNAVAILABLEE
+    move back to 1 before the curr square (aka return)
+next direction (SOUTH, WEST, NORTH)
+
