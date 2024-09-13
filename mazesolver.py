@@ -64,7 +64,29 @@ class MazeSolver():
                             neighbor = self.square_grid[new_row][new_col] # AI Citation
                             square.neighbor_list.append(neighbor) 
 
+########################### BEGIN AI CITATION [2a] ############################
+##########################################################################
+    def print_maze(self):
+        for row in self.square_grid:
+            for square in row:
+                if square.isStart:
+                    print("S", end=" ")  # Start
+                elif square.isGoal:
+                    print("G", end=" ")  # Goal
+                elif square in self.sln_path:
+                    print(".", end=" ")  # Current path
+                elif square.isWall:
+                    print("#", end=" ")  # Wall
+                else:
+                    print(" ", end=" ")  # Empty space
+            print()
+        print("\n")
+
     def dfs_helper(self, square):
+        self.print_maze()  # Print maze at each step
+########################### BEGIN AI CITATION [2a] ############################
+##########################################################################
+
         print("Visiting:", (square.x, square.y), square.val)
         self.cur_path.append(square)
         self.sln_path.append(square)
@@ -98,6 +120,3 @@ mymaze = MazeSolver(example_maze)
 mymaze.create_relationships()
 mymaze.dfs()
 
-sln = mymaze.sln_path
-for sq in sln:
-    print(sq.x, sq.y)
