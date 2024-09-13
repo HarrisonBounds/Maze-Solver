@@ -1,5 +1,5 @@
 # right, down, left, up
-dirs = [(0, 1), (1, 0), (0, -1), (1, 0)] # AI Citation
+dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)] # AI Citation
 
 class Square():
     def __init__(self, val, x, y, isWall):
@@ -16,12 +16,12 @@ class Square():
         return self.neighbor_list
     
 
-cur_path = []
-sln_path = []
 class MazeSolver():
     def __init__(self, maze):
         self.maze = maze
-        self.dfs_list = []
+        self.cur_path = []
+        self.sln_path = []
+        self.goal_found = False
         
     def is_valid_move(self, row, col):
         if row < len(self.maze) and row >= 0 and col < len(self.maze) and col >= 0: # within bounds
@@ -39,8 +39,8 @@ class MazeSolver():
                     if square_val == 99: # START square
                         square.isStart = True
                         square.visited = True
-                        cur_path.append(square) 
-                        sln_path.append(square)
+                        self.cur_path.append(square) 
+                        self.sln_path.append(square)
                     
                     if square_val == 100: # GOAL square
                         square.isGoal = True
@@ -56,27 +56,29 @@ class MazeSolver():
                                 square.neighbor_list.append(neigh)
 
 
-def dfs_helper(square):
-    print("Visiting:", (square.x, square.y), square.val)
-    cur_path.append(square)
-    sln_path.append(square)
-    square.visited = True
+    def dfs_helper(self, square):
+        print("Visiting:", (square.x, square.y), square.val)
+        self.cur_path.append(square)
+        self.sln_path.append(square)
+        square.visited = True
 
-    if square.isGoal == True:
-        print("GOAL FOUND")
-        return True
+        if square.isGoal == True:
+            print("GOAL FOUND")
+            return True
 
-    while len(square.neighbor_list) > 0:
-        neigh = square.neighbor_list.pop()
-        return dfs_helper(neigh)
+        for neigh in square.neighbor_list:
+            if not neigh.visited:
+                if self.dfs_helper(neigh):
+                    return True
 
-    sln_path.pop(square)
-    return False
+        # Backtrack if no solution found
+        self.sln_path.pop()
+        return False
 
 
-def dfs():
-    square = cur_path.pop()
-    return dfs_helper(square)
+    def dfs(self):
+        start_square = self.cur_path.pop()
+        return self.dfs_helper(start_square)
 
 
 example_maze = [[99, 0, 0, 1],
@@ -86,4 +88,4 @@ example_maze = [[99, 0, 0, 1],
 
 mymaze = MazeSolver(example_maze)
 mymaze.create_relationships()
-dfs()
+mymaze.dfs()
