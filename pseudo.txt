@@ -1,17 +1,37 @@
+use stack for dfs
+use queue for bfs
 
-cur square
-if within bounds
-check next square over in each direction (    
-    EAST
-    SOUTH
-    WEST
-    NORTH):
 
-if it's free, move in that direction (aka move_towards_dir)
-for example, EAST
-keep moving EAST
-if hit a wall, 
-    mark 1 before wall as UNAVAILABLEE
-    move back to 1 before the curr square (aka return)
-next direction (SOUTH, WEST, NORTH)
+keep track of:
+    visited_stack
+    cur_path
 
+
+
+
+
+loop through rows:
+    loop through cols:
+        get cur_square
+        add cur_square to cur_path
+        if dfs (cur_square, cur_path, visited_stack): // solution found
+            print SOLUTION FOUND
+            return cur_path
+print NO SOLUTION
+
+
+def dfs (cur, cur_path, visited_stack)
+    UPDATE VISUAL EACH DFS becuase it is each step/ square check HERE??
+
+    if cur == goal
+        add cur to cur_path
+        return true
+
+    add cur to cur_path
+
+    if cur_neighbors length > 0: // square has neighbors so check them
+        for neigh in cur_neighbors
+            if neigh not in visited_stack:
+                dfs (neigh, cur_path, visited_stack)
+    
+    add cur to visited_stack // done checking cur and its neighbors so can add it to visited stack

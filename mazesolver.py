@@ -1,11 +1,5 @@
-
-# use stack for dfs
-# use queue for bfs
-
-# left, right, up, down
-dirs = [(0, -1), (0, 1), (-1, 0), (1, 0)] # AI Citation
-# for item in dirs:
-#     print(item[0])
+# right, down, left, up
+dirs = [(0, 1), (1, 0), (0, -1), (1, 0)] # AI Citation
 
 class Square():
     def __init__(self, val, x, y, isWall):
@@ -13,11 +7,12 @@ class Square():
         self.x = x
         self.y = y
         self.isWall = isWall
+        self.visited = False
         self.neighbor_list = []
 
     def get_neighbors(self):
         return self.neighbor_list
-
+    
 
 class MazeSolver():
     def __init__(self, maze):
@@ -30,8 +25,7 @@ class MazeSolver():
         
     def create_relationships(self):
         maze_size = len(self.maze)
-        for row in range (1,2):
-        # for row in range (maze_size):
+        for row in range (maze_size):
             for col in range (maze_size):
 
                 square_val = self.maze[row][col]
@@ -52,7 +46,8 @@ class MazeSolver():
             for neigh in square.neighbor_list:
                 print(neigh.val)
 
-   
+    def dfs(maze):
+        return
 
 example_maze = [[99, 0, 0, 1],
                 [1, 0, 1, 1],
@@ -63,7 +58,7 @@ mymaze = MazeSolver(example_maze)
 mymaze.create_relationships()
 # mymaze.display_relationships()
 
-for square in mymaze.square_list:
-    print(square.val,": ")
-    for neigh in square.get_neighbors():
-        print(neigh.val)
+# for square in mymaze.square_list:
+#     print(square.val,": ")
+#     for neigh in square.get_neighbors():
+#         print(neigh.val)
