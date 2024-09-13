@@ -32,7 +32,7 @@ class MazeSolver:
         """
         # Check if we have reached a target cell marked as 4
         if self.maze[row][col] == 4:
-            self.maze[row][col] = 8  # Mark the target cell as part of the path
+            #self.maze[row][col] = 8  # Mark the target cell as part of the path
             return True
         
         # Mark the current cell as visited
@@ -69,10 +69,11 @@ class MazeSolver:
 
 
 # Example usage
-example_maze = [[3, 0, 0, 1],
-                [1, 0, 1, 1],
-                [0, 0, 0, 0],
-                [4, 1, 1, 1]]  # Target is marked by '4'
+example_maze = [[3, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 1, 1, 0, 1],
+                [1, 1, 1, 1, 1, 0, 0],
+                [1, 1, 4, 0, 1, 1, 0],
+                [1, 1, 1, 0, 0, 0, 0]]
 
 start = (0, 0)  # Starting position
 
