@@ -25,7 +25,7 @@ class MazeSolver():
         self.square_list = []
         
     def is_valid_move(self, row, col):
-        if row < len(self.maze) and row >= 0 and col < len(self.maze) and row >= 0: # within bounds
+        if row < len(self.maze) and row >= 0 and col < len(self.maze) and col >= 0: # within bounds
             return True
         
     def create_relationships(self):
