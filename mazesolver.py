@@ -18,6 +18,8 @@ class MazeSolver():
     def __init__(self, maze):
         self.maze = maze
         self.square_list = []
+        self.cur_path = []
+        self.sln_path = []
         
     def is_valid_move(self, row, col):
         if row < len(self.maze) and row >= 0 and col < len(self.maze) and col >= 0: # within bounds
@@ -46,7 +48,7 @@ class MazeSolver():
             for neigh in square.neighbor_list:
                 print(neigh.val)
 
-    def dfs(maze):
+    def dfs(self):
         return
 
 example_maze = [[99, 0, 0, 1],
