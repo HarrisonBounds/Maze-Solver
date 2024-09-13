@@ -15,6 +15,9 @@ class Square():
         self.isWall = isWall
         self.neighbor_list = []
 
+    def get_neighbors(self):
+        return self.neighbor_list
+
 
 class MazeSolver():
     def __init__(self, maze):
@@ -25,10 +28,10 @@ class MazeSolver():
         if row < len(self.maze) and row >= 0 and col < len(self.maze) and row >= 0: # within bounds
             return True
         
-    def create_relationship(self):
+    def create_relationships(self):
         maze_size = len(self.maze)
-        # for row in range (1):
-        for row in range (maze_size):
+        for row in range (2,3):
+        # for row in range (maze_size):
             for col in range (maze_size):
 
                 square_val = self.maze[row][col]
@@ -49,8 +52,7 @@ class MazeSolver():
             for neigh in square.neighbor_list:
                 print(neigh.val)
 
-    def get_neighbors(self, row, col):
-        pass
+   
 
 example_maze = [[99, 0, 0, 1],
                 [1, 0, 1, 1],
@@ -58,5 +60,10 @@ example_maze = [[99, 0, 0, 1],
                 [100, 1, 1, 1]]
 
 mymaze = MazeSolver(example_maze)
-mymaze.create_relationship()
-mymaze.display_relationships()
+mymaze.create_relationships()
+# mymaze.display_relationships()
+
+for square in mymaze.square_list:
+    print(square.val,": ")
+    for neigh in square.get_neighbors():
+        print(neigh.val)
