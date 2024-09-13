@@ -27,24 +27,25 @@ class MazeSolver():
         
     def create_relationship(self):
         maze_size = len(self.maze)
-        for row in range (1):
-        # for row in range (maze_size):
+        # for row in range (1):
+        for row in range (maze_size):
             for col in range (maze_size):
 
                 square_val = self.maze[row][col]
-                square = Square(square_val, row, col, square_val == 1)
+                if square_val != 1: # only add neighbors for valid squares
+                    square = Square(square_val, row, col, square_val == 1)
 
-                for item in dirs:
-                    new_row, new_col =  row + item[0], row + item[1] # AI Citation
-                    if (self.is_valid_move(new_row, new_col)):
-                        neigh_val = self.maze[new_row][new_col]
-                        if neigh_val != 1: # not a wall
-                            square.neighbor_list.append(Square(neigh_val, row, col, False))
-                self.square_list.append(square)
+                    for item in dirs:
+                        new_row, new_col =  row + item[0], col + item[1] # AI Citation
+                        if (self.is_valid_move(new_row, new_col)):
+                            neigh_val = self.maze[new_row][new_col]
+                            if neigh_val != 1: # not a wall
+                                square.neighbor_list.append(Square(neigh_val, row, col, False))
+                    self.square_list.append(square)
 
     def display_relationships(self):
         for square in self.square_list:
-            print(square.val, square.x, square.y, ":")
+            print(square.val,":")
             for neigh in square.neighbor_list:
                 print(neigh.val)
 
