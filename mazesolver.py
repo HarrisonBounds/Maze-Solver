@@ -118,18 +118,11 @@ example_maze = [[START, FREE, FREE, WALL],
                 [FREE, FREE, FREE, FREE],
                 [GOAL, WALL, WALL, WALL]]
 
-# mymaze = MazeSolver(example_maze)
-# mymaze.create_relationships()
-# mymaze.dfs()
 
 size = int(input())
 maze = Maze(size)
-start_row, start_col, goal_row, goal_col, maze = maze.gen_maze()
-print(start_row, start_col)
-print(goal_row, goal_row)
+start_row, start_col, goal_row, goal_col, maze_example = maze.gen_maze()
 
-print(maze)
-
-mymaze = MazeSolver(maze)
+mymaze = MazeSolver(maze_example)
 mymaze.create_relationships()
 mymaze.dfs()
