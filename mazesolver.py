@@ -11,7 +11,7 @@ class Square():
         self.isWall = isWall
         self.isStart = False
         self.isGoal = False
-        self.neighbor_list = []
+        self.neighbor_list = [] # can just be a list of indices, not Square objects
 
     def get_neighbors(self):
         return self.neighbor_list
@@ -49,34 +49,36 @@ class MazeSolver():
                     square.isGoal = True
 
 ########################## BEGIN AI CITATION 1a #####################################
-                self.square_grid[row][col] = square # track newly instan Square in square_rid
+                self.square_grid[row][col] = square # track newly instantiated Square in square_rid
 
                 for item in dirs:
                     new_row, new_col =  row + item[0], col + item[1]
                     if self.is_valid_move(new_row, new_col):
-                        neigh = self.square_grid[new_row][new_col]
-                        square.neighbor_list.append(neigh)
+                        neigh = [new_row, new_col]
+                        if neigh not in square.neighbor_list:
+                            square.neighbor_list.append(neigh)
 ########################## END AI CITATION 1a #######################################
 
-def dfs_helper(self, square):
-    print("Visiting:", (square.x, square.y), square.val)
-    self.cur_path.append(square)
-    self.sln_path.append(square)
 
-    if square.isGoal == True:
-        print("GOAL FOUND")
-        return True
+# def dfs_helper(self, square):
+#     print("Visiting:", (square.x, square.y), square.val)
+#     self.cur_path.append(square)
+#     self.sln_path.append(square)
 
-    for neigh in square.neighbor_list:
-        return dfs_helper(neigh)
+#     if square.isGoal == True:
+#         print("GOAL FOUND")
+#         return True
 
-    self.sln_path.remove(square)
-    return False
+#     for neigh in square.neighbor_list:
+#         return dfs_helper(neigh)
+
+#     self.sln_path.remove(square)
+#     return False
 
 
-def dfs(self):
-    square = self.cur_path.pop()
-    return dfs_helper(square)
+# def dfs(self):
+#     square = self.cur_path.pop()
+#     return dfs_helper(square)
 
 
 example_maze = [[99, 0, 0, 1],
@@ -86,4 +88,9 @@ example_maze = [[99, 0, 0, 1],
 
 mymaze = MazeSolver(example_maze)
 mymaze.create_relationships()
-mymaze.dfs()
+
+for row in mymaze.square_grid:
+    for sq in row: # AI CItation 1a
+        print(sq.val,":")
+        for neigh in sq.neighbor_list:
+            print(neigh)
