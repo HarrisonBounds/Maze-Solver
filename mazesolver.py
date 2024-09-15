@@ -75,13 +75,34 @@ class MazeSolver():
         for sq in self.sln_path:
             print(sq.val, ":", sq.row, sq.col)
 
+    def print_maze_each_step(self):
+        for row in self.square_grid:
+            for sq in row:
+                if sq.isWall:
+                    print("X", end=" ")
+                elif sq.isStart:
+                    print("S", end=" ")
+                elif sq.isGoal:
+                    print("G", end=" ")
+                elif [sq.row, sq.col] in self.visited_list:
+                    print(".", end=" ")
+                else:
+                    print(" ", end=" ")
+            print("\n")
+        print("######################################\n")
+
     def dfs(self):
+        self.print_maze_each_step()
+        print("\n")
+
         square = self.stack.pop()
         self.visited_list.append([square.row, square.col]) # add START square to the stck
         for n_idx in square.neighbor_list:
             self.stack.append(self.square_grid[n_idx[0]][n_idx[1]]) # and add its neighbors
 
         while self.stack != None: # while there are still available squares to explore
+            self.print_maze_each_step()
+            
             n = self.stack.pop() # explore a neighbor
             self.visited_list.append([n.row, n.col])
 
