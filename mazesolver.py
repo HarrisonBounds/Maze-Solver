@@ -1,7 +1,7 @@
 from var_names import *
 
 # right, down, left, up
-dirs = [(0, 1), (1, 0), (0, -1), (1, 0)] # AI Citation
+dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)] # AI Citation
 
 class Square():
     def __init__(self, val, row, col, isWall):
