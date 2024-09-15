@@ -21,8 +21,8 @@ class MazeSolver():
     def __init__(self, maze):
         self.maze = maze
         self.visited_stack = []
-        self.cur_path = []
-        self.sln_path = []
+        self.cur_path = [] # AI Citation 1a
+        self.sln_path = [] # AI Citation 1a
 
 
         # AI Citation 1a 
