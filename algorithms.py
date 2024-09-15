@@ -16,64 +16,33 @@ class Maze:
                     start = (i, j)
                     return start
                 
-    def bfs(self, maze, row, col):
-        
-        bfs_counter = 1
+    def bfs(self, maze):
         start = self.findStart(maze)
-        current = start
-        print("type of current:", type(current[0]))
+        queue = [[start]]
         directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-        print("type of directions:", type(directions[0]))
         
-        while True:
-            
-            for direction in directions:
-                new_row = current[0] + direction[0]
-                new_col = current[1] + direction[1]
-                
-                if self.checkBounds(new_row, new_col):
-                    current = (new_row, new_col)
-                    maze[new_row][new_col] = bfs_counter
-                    
-            if maze[new_row][new_col] == "G":
-                return True
-                    
-            bfs_counter += 1
-            
-            
-        return False
-                    
-            
-                    
-        
-        # while queue:
-        #     current = queue.pop(0)
-        #     row, col = current
-            
-        #     if maze[row][col] == "G":
-        #         return True
-            
-        #     if current not in self.visited:
-        #         self.visited.append(current)
-                
-        #         #Search north, south, east, west
-        #         for direction in directions:
-        #             new_row = current[0] + direction[0]
-        #             new_col = current[1] + direction[1]
-                    
-                    
-        #             if self.checkBounds(new_row, new_col):
-        #                 queue.append((new_row, new_col))
-        #                 maze[new_row][new_col] = bfs_counter
+        while queue:
+            path = queue.pop(0)
+            row, col = path[-1]
                         
-        #         bfs_counter += 1
-                             
-    
-        # return False
-        
-        
+            if maze[row][col] == "G":
+                return path
             
-    def dfs(self, maze, row, col):
+                
+            for direction in directions:
+                new_row = direction[0] + row
+                new_col = direction[1] + col
+                
+                if self.checkBounds(new_row, new_col) and (new_row, new_col) not in self.visited:
+                    new_path = list(path)
+                    new_path.append((new_row, new_col))
+                    queue.append(new_path)
+                
+
+                    
+        return False
+            
+    def dfs(self, maze):
         start = self.findStart(maze)
         stack = [start]
         directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
@@ -83,9 +52,12 @@ class Maze:
             current = stack.pop()
             row, col = current
             
+            print("Current cell", current)
+
             #If we reach our goal return true
             if maze[row][col] == "G":
-                return True
+                self.visited.append((row, col))
+                return self.visited
             
             if current not in self.visited:
                 self.visited.append(current)
@@ -97,8 +69,6 @@ class Maze:
                     
                     if self.checkBounds(new_row, new_col) and (new_row, new_col) not in self.visited:
                             stack.append((new_row, new_col))
-                            if maze[row][col] != "S":
-                                maze[row][col] = "P"
                         
     
         return False
@@ -109,5 +79,5 @@ maze = [["S", '.', '.', 'W'],
         ["G", "W", "W", "W"]]
 
 maze_solver = Maze(maze, len(maze[0]), (len(maze[1])))
-maze_solver.bfs(maze, 0, 0)
-print(maze)
+path = maze_solver.bfs(maze)
+print(path)

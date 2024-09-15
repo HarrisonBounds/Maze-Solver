@@ -1,1 +1,2 @@
-[1a] GPT-4-Turbo, OpenAI, Used on 09/12/2024. Transcript available in ai_citations.txt
+[1a] SQLPad, “Python maze solver - Maze-solving algorithms! How these intricate networks are navigated using Python, covering concepts from pathfinding to robotic applications and machine learning. - SQLPad.io,” sqlpad.io. https://sqlpad.io/tutorial/python-maze-solver/
+[2a] HackerRank. “Algorithms: Graph Search, DFS and BFS.” YouTube, 27 Sept. 2016, www.youtube.com/watch?v=zaBhtODEL0w. Accessed 15 Sept. 2024.
