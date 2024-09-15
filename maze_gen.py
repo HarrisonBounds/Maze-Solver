@@ -13,11 +13,11 @@ class Maze:
 
     def gen_maze(self):
         size = self.size
-        start_row, start_col = random.randint(0, size), random.randint(0, size)
-        goal_row, goal_col = random.randint(0, size), random.randint(0, size)
+        start_row, start_col = random.randint(0, size - 1), random.randint(0, size - 1)
+        goal_row, goal_col = random.randint(0, size - 1), random.randint(0, size - 1)
 
         while goal_row == start_row and goal_col == start_col:
-            goal_row, goal_col = random.randint(0, size), random.randint(0, size)
+            goal_row, goal_col = random.randint(0, size - 1), random.randint(0, size - 1)
 
         self.start_row = start_row
         self.start_col = start_col
@@ -37,10 +37,10 @@ class Maze:
                     maze_grid[row][col] = random.choice(square_type)
         return start_row, start_col, goal_row, goal_row, maze_grid
 
-size = 4
-maze = Maze(size)
-start_row, start_col, goal_row, goal_col, maze = maze.gen_maze()
-print(start_row, start_col)
-print(goal_row, goal_row)
+# size = 4
+# maze = Maze(size)
+# start_row, start_col, goal_row, goal_col, maze = maze.gen_maze()
+# print(start_row, start_col)
+# print(goal_row, goal_row)
 
-print(maze)
+# print(maze)

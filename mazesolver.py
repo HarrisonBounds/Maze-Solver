@@ -1,5 +1,6 @@
 from var_names import *
 from square import Square
+from maze_gen import *
 
 # right, down, left, up
 dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)] # AI Citation
@@ -146,6 +147,18 @@ unsolvable_maze = [
 # mymaze.create_relationships()
 # mymaze.dfs()
 
-mymaze = MazeSolver(unsolvable_maze)
+# mymaze = MazeSolver(unsolvable_maze)
+# mymaze.create_relationships()
+# mymaze.dfs()
+
+size = 4
+maze = Maze(size)
+start_row, start_col, goal_row, goal_col, maze = maze.gen_maze()
+print(start_row, start_col)
+print(goal_row, goal_row)
+
+print(maze)
+
+mymaze = MazeSolver(maze)
 mymaze.create_relationships()
 mymaze.dfs()
