@@ -29,14 +29,14 @@ class MazeSolver():
         
     def is_valid_move(self, row, col):
         if row < len(self.maze) and row >= 0 and col < len(self.maze) and col >= 0: # within bounds
-            return self.square_grid[row][col] != WALL and self.square_grid not in self.visited_list # AI Citation 1a
+            square = self.square_grid[row][col]
+            return square.val != WALL and [square.row, square.col] not in self.visited_list # AI Citation 1a
         return False
         
-    def create_relationships(self):
+    def setup_square_grid(self): # instantiate ALL the squares in the maze, including walls
         maze_size = len(self.maze)
         for row in range (maze_size):
             for col in range (maze_size):
-
                 square_val = self.maze[row][col]
                 square = Square(square_val, row, col, square_val == WALL)
 
@@ -47,17 +47,30 @@ class MazeSolver():
                 
                 if square_val == GOAL: # GOAL square
                     square.isGoal = True
-
 ########################## BEGIN AI CITATION 1a #####################################
+#####################################################################################
+
                 self.square_grid[row][col] = square # track newly instantiated Square in square_rid
 
-                for item in dirs:
-                    new_row, new_col =  row + item[0], col + item[1]
-                    if self.is_valid_move(new_row, new_col):
-                        neigh = [new_row, new_col]
-                        if neigh not in square.neighbor_list:
-                            square.neighbor_list.append(neigh)
+    def create_relationships(self):
+        self.setup_square_grid()
+
+        maze_size = len(self.maze)
+        for row in range (maze_size):
+            for col in range (maze_size):
+
+                square = self.square_grid[row][col] # accessed already created Square to establish neighbors
+
+                if not square.isWall:
+                    for item in dirs:
+                        new_row, new_col =  row + item[0], col + item[1]
+                        if self.is_valid_move(new_row, new_col):
+                            neigh_idx = [new_row, new_col]
+                            if neigh_idx not in square.neighbor_list:
+                                square.neighbor_list.append(neigh_idx)
 ########################## END AI CITATION 1a #######################################
+#####################################################################################
+
     def print_sln(self):
         for sq in self.sln_path:
             print(sq.val, ":", sq.row, sq.col)
