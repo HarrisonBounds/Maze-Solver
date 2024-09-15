@@ -17,12 +17,12 @@ class Square():
         return self.neighbor_list
     
 
-cur_path = []
-sln_path = []
 class MazeSolver():
     def __init__(self, maze):
         self.maze = maze
         self.visited_stack = []
+        self.cur_path = []
+        self.sln_path = []
 
 
         # AI Citation 1a 
@@ -44,8 +44,8 @@ class MazeSolver():
 
                     if square_val == START: # START square
                         square.isStart = True
-                        cur_path.append(square) 
-                        sln_path.append(square)
+                        self.cur_path.append(square) 
+                        self.sln_path.append(square)
                     
                     if square_val == GOAL: # GOAL square
                         square.isGoal = True
@@ -61,10 +61,10 @@ class MazeSolver():
                                 square.neighbor_list.append(neigh)
 
 
-def dfs_helper(square):
+def dfs_helper(self, square):
     print("Visiting:", (square.x, square.y), square.val)
-    cur_path.append(square)
-    sln_path.append(square)
+    self.cur_path.append(square)
+    self.sln_path.append(square)
 
     if square.isGoal == True:
         print("GOAL FOUND")
@@ -73,12 +73,12 @@ def dfs_helper(square):
     for neigh in square.neighbor_list:
         return dfs_helper(neigh)
 
-    sln_path.remove(square)
+    self.sln_path.remove(square)
     return False
 
 
-def dfs():
-    square = cur_path.pop()
+def dfs(self):
+    square = self.cur_path.pop()
     return dfs_helper(square)
 
 
@@ -89,4 +89,4 @@ example_maze = [[99, 0, 0, 1],
 
 mymaze = MazeSolver(example_maze)
 mymaze.create_relationships()
-dfs()
+mymaze.dfs()
