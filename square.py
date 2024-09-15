@@ -7,7 +7,3 @@ class Square():
         self.isStart = False
         self.isGoal = False
         self.neighbor_list = [] # can just be a list of indices, not Square objects
-
-    def get_neighbors(self):
-        return self.neighbor_list
-    
