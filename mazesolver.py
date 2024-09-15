@@ -24,7 +24,6 @@ class MazeSolver():
         self.cur_path = [] # AI Citation 1a
         self.sln_path = [] # AI Citation 1a
 
-
         # AI Citation 1a 
         self.square_grid = [[None] * len(maze) for _ in range (len(maze))] # to access the squares and their relationships
         
@@ -39,26 +38,36 @@ class MazeSolver():
             for col in range (maze_size):
 
                 square_val = self.maze[row][col]
-                if square_val != WALL: # only add neighbors for non-wall squares
-                    square = Square(square_val, row, col, square_val == WALL)
+                # if square_val != WALL: # only add neighbors for non-wall squares -->
+                # --> WRONG should make Square instance for ALL the squares instead of just non-walls
+                square = Square(square_val, row, col, square_val == WALL)
 
-                    if square_val == START: # START square
-                        square.isStart = True
-                        self.cur_path.append(square) 
-                        self.sln_path.append(square)
-                    
-                    if square_val == GOAL: # GOAL square
-                        square.isGoal = True
+                if square_val == START: # START square
+                    square.isStart = True
+                    self.cur_path.append(square) 
+                    self.sln_path.append(square)
+                
+                if square_val == GOAL: # GOAL square
+                    square.isGoal = True
 
-                    for item in dirs:
-                        new_row, new_col =  row + item[0], col + item[1] # AI Citation
-                        if (self.is_valid_move(new_row, new_col)):
-                            neigh_val = self.maze[new_row][new_col]
-                            if neigh_val != 1: # not a wall
-                                neigh = Square(neigh_val, new_row, new_col, False)
-                                if neigh_val == GOAL: # GOAL square
-                                    neigh.isGoal = True
-                                square.neighbor_list.append(neigh)
+########################## BEGIN AI CITATION 1a #####################################
+                self.square_grid[row][col] = square # track newly instan Square in square_rid
+
+                for item in dirs:
+                    new_row, new_col =  row + item[0], col + item[1]
+                    if self.is_valid_move(new_row, new_col):
+                        neigh = self.square_grid[new_row][new_col]
+                        square.neighbor_list.append(neigh)
+########################## END AI CITATION 1a #######################################
+
+                        # WRONG way to add neighbor relationship
+                        # neigh_val = self.maze[new_row][new_col]
+                        # if neigh_val != 1: # not a wall
+                        #     neigh = Square(neigh_val, new_row, new_col, False)
+                        #     if neigh_val == GOAL: # GOAL square
+                        #         neigh.isGoal = True
+                        #     self.square_grid[new_row][new_col] = neigh
+                        #     square.neighbor_list.append(neigh)
 
 
 def dfs_helper(self, square):
