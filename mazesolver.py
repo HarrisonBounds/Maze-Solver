@@ -118,40 +118,11 @@ example_maze = [[START, FREE, FREE, WALL],
                 [FREE, FREE, FREE, FREE],
                 [GOAL, WALL, WALL, WALL]]
 
-
-########################## BEGIN AI CITATION 3a ##################################### #TODO: reorganize citation
-#####################################################################################
-solvable_maze = [
-    [1, 1, 1, 1, 1],
-    [1, 3, 2, 4, 1],
-    [1, 2, 1, 2, 1],
-    [1, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1]
-]
-
-unsolvable_maze = [
-    [1, 1, 1, 1, 1],
-    [1, 3, 2, 1, 1],
-    [1, 2, 1, 2, 1],
-    [1, 2, 2, 1, 1],
-    [1, 1, 1, 1, 4]
-]
-########################## END AI CITATION 3a #####################################
-#####################################################################################
-
 # mymaze = MazeSolver(example_maze)
 # mymaze.create_relationships()
 # mymaze.dfs()
 
-# mymaze = MazeSolver(solvable_maze)
-# mymaze.create_relationships()
-# mymaze.dfs()
-
-# mymaze = MazeSolver(unsolvable_maze)
-# mymaze.create_relationships()
-# mymaze.dfs()
-
-size = 4
+size = int(input())
 maze = Maze(size)
 start_row, start_col, goal_row, goal_col, maze = maze.gen_maze()
 print(start_row, start_col)
