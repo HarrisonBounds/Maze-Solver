@@ -38,8 +38,6 @@ class MazeSolver():
             for col in range (maze_size):
 
                 square_val = self.maze[row][col]
-                # if square_val != WALL: # only add neighbors for non-wall squares -->
-                # --> WRONG should make Square instance for ALL the squares instead of just non-walls
                 square = Square(square_val, row, col, square_val == WALL)
 
                 if square_val == START: # START square
@@ -59,16 +57,6 @@ class MazeSolver():
                         neigh = self.square_grid[new_row][new_col]
                         square.neighbor_list.append(neigh)
 ########################## END AI CITATION 1a #######################################
-
-                        # WRONG way to add neighbor relationship
-                        # neigh_val = self.maze[new_row][new_col]
-                        # if neigh_val != 1: # not a wall
-                        #     neigh = Square(neigh_val, new_row, new_col, False)
-                        #     if neigh_val == GOAL: # GOAL square
-                        #         neigh.isGoal = True
-                        #     self.square_grid[new_row][new_col] = neigh
-                        #     square.neighbor_list.append(neigh)
-
 
 def dfs_helper(self, square):
     print("Visiting:", (square.x, square.y), square.val)
