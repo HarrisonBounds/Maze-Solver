@@ -66,7 +66,7 @@ class MazeSolver():
         for row in self.square_grid:
             for sq in row:
                 if sq.isWall:
-                    print("X", end=" ")
+                    print("x", end=" ")
                 elif sq.isStart:
                     print("S", end=" ")
                 elif sq.isGoal:
@@ -109,6 +109,8 @@ class MazeSolver():
         print("No solution.")
         return False
 
+    def bfs(self):
+        return False
 
 example_maze = [[START, FREE, FREE, WALL],
                 [WALL, FREE, WALL, WALL],
