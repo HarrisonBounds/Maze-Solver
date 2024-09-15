@@ -12,7 +12,6 @@ class Square():
         self.isStart = False
         self.isGoal = False
         self.neighbor_list = []
-        self.visited_stack = []
 
     def get_neighbors(self):
         return self.neighbor_list
@@ -23,29 +22,25 @@ sln_path = []
 class MazeSolver():
     def __init__(self, maze):
         self.maze = maze
-        self.dfs_list = []
-        self.mazegrid = [] # to access the squares and their relationships
+        self.visited_stack = []
+
+
+        # AI Citation 1a 
+        self.square_grid = [[None] * len(maze) for _ in range (len(maze))] # to access the squares and their relationships
         
     def is_valid_move(self, row, col):
         if row < len(self.maze) and row >= 0 and col < len(self.maze) and col >= 0: # within bounds
-            return True
-        
-    # def setup_mazegrid(self):
-    #     maze_size = len(self.maze)
-    #     for row in range (maze_size):
-    #         for col in range (maze_size):
-    #             self.mazegrid[row][col] = None
+            return self.square_grid[row][col] != WALL and self.square_grid not in self.visited_stack # AI Citation 1a
+        return False
         
     def create_relationships(self):
-        # self.setup_mazegrid()
-
         maze_size = len(self.maze)
         for row in range (maze_size):
             for col in range (maze_size):
 
                 square_val = self.maze[row][col]
-                if square_val != 1: # only add neighbors for valid squares
-                    square = Square(square_val, row, col, square_val == 1)
+                if square_val != WALL: # only add neighbors for non-wall squares
+                    square = Square(square_val, row, col, square_val == WALL)
 
                     if square_val == START: # START square
                         square.isStart = True

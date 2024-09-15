@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/45048005/assign-permanent-variable-in-python-3
