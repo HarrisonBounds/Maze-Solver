@@ -59,9 +59,9 @@ class MazeSolver():
         for row in range (maze_size):
             for col in range (maze_size):
 
-                square = self.square_grid[row][col] # accessed already created Square to establish neighbors
+                square = self.square_grid[row][col] # access already created Square to establish neighbors
 
-                if not square.isWall:
+                if not square.isWall: 
                     for item in dirs:
                         new_row, new_col =  row + item[0], col + item[1]
                         if self.is_valid_move(new_row, new_col):
@@ -81,7 +81,7 @@ class MazeSolver():
         for n_idx in square.neighbor_list:
             self.stack.append(self.square_grid[n_idx[0]][n_idx[1]]) # and add its neighbors
 
-        while self.stack != None:
+        while self.stack != None: # while there are still available squares to explore
             n = self.stack.pop() # explore a neighbor
             self.visited_list.append([n.row, n.col])
 
