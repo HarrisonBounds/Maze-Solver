@@ -69,9 +69,9 @@ class MazeSolver():
                 if sq.isWall:
                     print("x", end=" ")
                 elif sq.isStart:
-                    print("S", end=" ")
+                    print("1", end=" ")
                 elif sq.isGoal:
-                    print("G", end=" ")
+                    print("2", end=" ")
                 elif [sq.row, sq.col] in self.visited_list:
                     print(".", end=" ")
                 else:
