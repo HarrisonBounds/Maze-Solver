@@ -91,7 +91,7 @@ class MazeSolver():
             print("\n")
         print("######################################\n")
 
-    def dfs(self):
+    def dfs(self): # TODO: Cite https://www.programiz.com/dsa/graph-dfs
         self.print_maze_each_step()
         print("\n")
 
@@ -100,7 +100,7 @@ class MazeSolver():
         for n_idx in square.neighbor_list:
             self.stack.append(self.square_grid[n_idx[0]][n_idx[1]]) # and add its neighbors
 
-        while self.stack != None: # while there are still available squares to explore
+        while len(self.stack) != 0 : # while there are still available squares to explore
             self.print_maze_each_step()
             
             n = self.stack.pop() # explore a neighbor
@@ -123,11 +123,40 @@ class MazeSolver():
         return False
 
 
-example_maze = [[99, 0, 0, 1],
-                [1, 0, 1, 1],
-                [0, 0, 0, 0],
-                [100, 1, 1, 1]]
+example_maze = [[START, FREE, FREE, WALL],
+                [WALL, FREE, WALL, WALL],
+                [FREE, FREE, FREE, FREE],
+                [GOAL, WALL, WALL, WALL]]
 
-mymaze = MazeSolver(example_maze)
+
+########################## BEGIN AI CITATION 1a #####################################
+#####################################################################################
+solvable_maze = [
+    [1, 1, 1, 1, 1],
+    [1, 3, 2, 4, 1],
+    [1, 2, 1, 2, 1],
+    [1, 2, 2, 2, 1],
+    [1, 1, 1, 1, 1]
+]
+
+unsolvable_maze = [
+    [1, 1, 1, 1, 1],
+    [1, 3, 2, 1, 1],
+    [1, 2, 1, 2, 1],
+    [1, 2, 2, 1, 1],
+    [1, 1, 1, 1, 4]
+]
+########################## END AI CITATION 1a #####################################
+#####################################################################################
+
+# mymaze = MazeSolver(example_maze)
+# mymaze.create_relationships()
+# mymaze.dfs()
+
+# mymaze = MazeSolver(solvable_maze)
+# mymaze.create_relationships()
+# mymaze.dfs()
+
+mymaze = MazeSolver(unsolvable_maze)
 mymaze.create_relationships()
 mymaze.dfs()
