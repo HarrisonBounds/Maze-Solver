@@ -1,7 +1,7 @@
 from maze import Maze
 from BFS_solver import BFSSolver
 
-maze = Maze(180,320)
+maze = Maze(360,320)
 maze.init_random_maze_map()
 
 bfs_solver = BFSSolver(maze)
