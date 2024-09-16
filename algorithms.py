@@ -1,4 +1,4 @@
-class Maze:
+class Maze_Solver:
     def __init__(self, maze, rows, cols) -> None:
         self.maze = maze
         self.rows = rows
