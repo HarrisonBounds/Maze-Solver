@@ -21,7 +21,34 @@ class Maze_Solver:
                     start = (i, j)
                     return start
                 
+    def findShortestPath(self, maze, end):
+        path = []
+        directions = [(0, -1), (0, 1), (-1, 0), (-1, 0)]
+        current = end
+        
+        while current:
+            path.append(current)
+            row, col = current
+            
+            if maze[row][col] == 3:
+                break
+            
+            found = False
+            for direction in directions:
+                prev_row = row + direction[0]
+                prev_col = col + direction[1]
+                if 0 <= prev_row < self.rows and 0 <= prev_col < self.cols and maze[prev_row][prev_col] == 7:
+                    current = (prev_row, prev_col)
+                    found = True
+                    break
+            if not found:
+                break
+            
+        path.reverse()
+        return path 
+                
     def bfs(self, maze):
+        end = None
         q = deque()
         start = self.findStart(maze)
         q.append([start])
@@ -32,6 +59,7 @@ class Maze_Solver:
             row, col = path[-1]
                         
             if maze[row][col] == 4:
+                end = (row, col)
                 break
               
             for direction in directions:
@@ -48,11 +76,12 @@ class Maze_Solver:
                     
             self.visualizer.display_single_state(np.matrix(self.maze), interval=0.001)
                 
-
-        for x, y in path:
-            maze[x][y] = 3
-            self.visualizer.display_single_state(np.matrix(self.maze), interval=0.1)
-        
+        if end is not None:
+            path = self.findShortestPath(maze, end)
+            for x, y in path:
+                maze[x][y] = 3
+                self.visualizer.display_single_state(np.matrix(self.maze), interval=0.1)
+            
         return path
               
         
@@ -60,6 +89,7 @@ class Maze_Solver:
         start = self.findStart(maze)
         stack = [start]
         directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        end = None
                 
         while stack:
             #Use a stack to get the current position by popping
@@ -70,6 +100,7 @@ class Maze_Solver:
             #If we reach our goal return true
             if maze[row][col] == 4:
                 self.visited.append((row, col))
+                end = current
                 break
             
             if current not in self.visited:
@@ -86,12 +117,14 @@ class Maze_Solver:
                         
                             
             self.visualizer.display_single_state(np.matrix(self.maze), interval=0.01)
-            
-        for x, y in self.visited:
-            maze[x][y] = 3
-            self.visualizer.display_single_state(np.matrix(self.maze), interval=0.1)
+        if end is not None: 
+            path = self.findShortestPath(maze, end)
+
+            for x, y in path:
+                maze[x][y] = 3
+                self.visualizer.display_single_state(np.matrix(self.maze), interval=0.1)
         
-        return self.visited
+        return path
                         
         
 
