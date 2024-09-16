@@ -56,6 +56,16 @@ class Stack:
         """
         return self.data.pop()
     
+    
+    def get_top_element(self):
+        """
+        Return the element on the top of the stack.
+        
+        Input: None
+        Return: The top element on the top of the stack
+        """
+        return self.data[-1]
+    
 class Queue:
     """
     Pre-defined Queue data structure.
