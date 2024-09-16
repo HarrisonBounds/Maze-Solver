@@ -27,9 +27,12 @@ class DFSSolver:
                 neighbour_index = self.maze.position_to_node_index_table[str(neighbour_position)]
                 if(neighbour_index == self.maze.goal_node_index):
                     found_the_goal = True
+                    break
                 if(self.maze.nodes[neighbour_index].state==FREE):
                     num_free_neighbours += 1
                     free_neighbour_index = neighbour_index
+            if(found_the_goal == True):
+                break
             if(num_free_neighbours > 0):
                 self.visiting_stack.push(free_neighbour_index)
                 self.maze.nodes[free_neighbour_index].state = VISITING
