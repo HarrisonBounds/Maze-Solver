@@ -1,5 +1,18 @@
 # NU-Wild-Rabbit
 
+## Installation
+```sh
+git clone git@github.com:HarrisonBounds/Maze-Solver.git
+```
+
+## Demo
+```sh
+# The DFS Demo
+python3 src/dfs_demo.py
+
+# The BFS Demo
+python3 src/bfs_demo.py
+```
 ## Example Matrix
 ```python
 import numpy as np
@@ -32,8 +45,3 @@ We should have three main funcitons, each is a class.
 * Maze Visualizer: Visualizing the maze map.
   * Input: 2D Numpy Matrix
   * Output: Visualization
-
-## Installation
-```sh
-git clone git@github.com:HarrisonBounds/Maze-Solver.git
-```
