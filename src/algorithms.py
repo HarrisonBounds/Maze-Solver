@@ -1,4 +1,5 @@
 from maze_visualizer import MazeVisualizer
+from collections import deque
 import numpy as np
 
 class Maze_Solver:
@@ -10,7 +11,7 @@ class Maze_Solver:
         self.visualizer = MazeVisualizer()
         
     def checkBounds(self, row, col):
-        if 0 <= row < self.rows and 0 <= col < self.cols and maze[row][col] != 1:
+        if 0 <= row < self.rows and 0 <= col < self.cols and self.maze[row][col] != 1:
             return True
         
     def findStart(self, maze):
@@ -21,36 +22,37 @@ class Maze_Solver:
                     return start
                 
     def bfs(self, maze):
+        q = deque()
         start = self.findStart(maze)
-        queue = [[start]]
+        q.append(start)
         directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
         
-        while queue:
-            path = queue.pop(0)
+        while q:
+            path = q.popleft()
             row, col = path[-1]
                         
             if maze[row][col] == 4:
                 break
               
             for direction in directions:
-                new_row = direction[0] + romaze[new_row][new_col] = 7w
+                new_row = direction[0] + row
                 new_col = direction[1] + col
                 
                 if self.checkBounds(new_row, new_col) and (new_row, new_col) not in self.visited:
                     new_path = list(path)
                     new_path.append((new_row, new_col))
-                    queue.append(new_path)
-                    if maze[new_row][new_col] != 4:
+                    q.append(new_path)
+                    
+                    if maze[new_row][new_col] != 4 and maze[new_row][new_col] != 3:
                         maze[new_row][new_col] = 7
                     
-            self.visualizer.display_single_state(np.matrix(self.maze), interval=0.1)
+            self.visualizer.display_single_state(np.matrix(self.maze), interval=0.001)
                 
 
         for x, y in path:
-            print("Here")
             maze[x][y] = 3
-            self.visualizer.display_single_state(np.matrix(self.maze), interval=0.01)
-            
+            self.visualizer.display_single_state(np.matrix(self.maze), interval=0.1)
+        
         return path
               
         
@@ -58,7 +60,7 @@ class Maze_Solver:
         start = self.findStart(maze)
         stack = [start]
         directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-        
+                
         while stack:
             #Use a stack to get the current position by popping
             current = stack.pop()
@@ -68,7 +70,7 @@ class Maze_Solver:
             #If we reach our goal return true
             if maze[row][col] == 4:
                 self.visited.append((row, col))
-                return self.visited
+                break
             
             if current not in self.visited:
                 self.visited.append(current)
@@ -79,19 +81,18 @@ class Maze_Solver:
                     new_col = current[1] + direction[1]
                     
                     if self.checkBounds(new_row, new_col) and (new_row, new_col) not in self.visited:
-                            stack.append((new_row, new_col))
-                            maze[row][col] = 7
-                            
-            self.visualizer.display_single_state(np.matrix(self.maze), interval=0.5)
+                        stack.append((new_row, new_col))
+                        maze[row][col] = 7
                         
-    
-        return False
+                            
+            self.visualizer.display_single_state(np.matrix(self.maze), interval=0.01)
+            
+        for x, y in self.visited:
+            maze[x][y] = 3
+            self.visualizer.display_single_state(np.matrix(self.maze), interval=0.1)
         
-maze = [[3, 2, 2, 1],
-        [1, 2, 1, 1],
-        [2, 2, 2, 2],
-        [4, 1, 1, 1]]
+        return self.visited
+                        
+        
 
-maze_solver = Maze_Solver(maze, len(maze[0]), (len(maze[1])))
-path = maze_solver.bfs(maze)
 
