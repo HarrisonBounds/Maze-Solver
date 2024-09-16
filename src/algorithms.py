@@ -24,8 +24,8 @@ class Maze_Solver:
     def bfs(self, maze):
         q = deque()
         start = self.findStart(maze)
-        q.append(start)
-        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        q.append([start])
+        directions = [(0, -1), (0, 1), (-1, 0), (-1, 0)]
         
         while q:
             path = q.popleft()
