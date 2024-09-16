@@ -4,7 +4,7 @@ import matplotlib.colors as mcolors
 class MazeVisualizer:
     def __init__(self):
         # Define a discrete colormap
-        self._colors = ['purple', 'black', 'white', 'blue', 'red', 'orange', 'purple', 'yellow']
+        self._colors = ['purple', 'black', 'white', 'blue', 'red', 'orange', 'green', 'yellow']
         self._cmap = mcolors.ListedColormap(self._colors)
         self._bounds = [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.6, 7.5]  # Define boundaries for each color
         self._norm = mcolors.BoundaryNorm(self._bounds, self._cmap.N)
