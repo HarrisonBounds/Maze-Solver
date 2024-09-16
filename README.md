@@ -1,45 +1,15 @@
-# NU-Wild-Rabbit
-
-## Run Han's Demo
-You can specify using BFS or DFS in [integrate.py](https://github.com/HarrisonBounds/Maze-Solver/blob/han/integrate.py)
-```sh
-python3 integrate.py
-```
-
-## Example Matrix
-```python
-import numpy as np
-
-example_maze = np.mat([[3, 2, 2, 1],
-                       [1, 2, 1, 1],
-                       [2, 2, 2, 2],
-                       [4, 1, 2, 2]])
-```
-
-## Pre-defiend Data Structue
-The maze is defiend as a 2D matrix in numpy. Each element in this matrix is a int number. Here's the corresponding states for different numbers:
-* 1: Wall
-* 2: Free
-* 3: Start
-* 4: Goal
-* 5: Visiting
-* 6: Visited
-* 7: Available Path
-* 8: Unavailable Path
-
-## Roadmap
-We should have three main funcitons, each is a class.
-* Maze Generator: Generates a maze map with predefiend data structue (2D numpy matrix).
-  * Input: User UI / Random Generating
-  * Output: 2D Numpy Matrix
-* Maze Solver: Iterates the maze matrix state and record every iterated state for further visualization.
-  * Input: 2D Numpy Matrix
-  * Output: Recorded 2D Numpy Matrices in every iteration
-* Maze Visualizer: Visualizing the maze map.
-  * Input: 2D Numpy Matrix
-  * Output: Visualization
+# My Solutions for [Northwestern University MSR Hackathon Python Challenge](https://nu-msr.github.io/hackathon/python_challenge.html)
 
 ## Installation
 ```sh
-git clone git@github.com:HarrisonBounds/Maze-Solver.git
+# For SSH Users
+git clone git@github.com:nu-wild-rabbit/hackathon-solutions.git
+
+# For HTTPS Users
+git clone https://github.com/nu-wild-rabbit/hackathon-solutions.git
+```
+
+## Run the Demo
+```python
+python3 src/main.py
 ```
