@@ -15,9 +15,7 @@ import numpy as np
 #     def visiting(flag):
 #         self.visit = flag
 #     def delete():
-#     def add():
-
-        
+#     def add():       
     # visited - or not
     # visiting/current node - or not
 
@@ -32,55 +30,57 @@ class bfs_planner():
         self.valMat = {}
         self.distance = 0
         self.visitedQueue = list()
+        self.neighbour = list() # list of (neighbourX, neighbourY)
 
-    #  Need to make changes here, 
     def updateValMat(self, neighbourX, neighbourY, value):
         if (neighbourX, neighbourY) in self.valMat:
             prevVal = self.valMat[(neighbourX, neighbourY)]
             if ( prevVal < value):
-                print("skip") # dont skip if visited, skip if distanceis lower than what u want: check if the else is working as it should..
+                print("skip") # dont skip if visited, skip if distances lower than what u want: check if the else is working as it should..
         else:
-            self.neighbour.append((neighbourX, neighbourY))
             self.valMat[(neighbourX, neighbourY)] = value
 
     def suitableNeighbour(self, neighbourX, neighbourY):
-        # Assume rows = 4, coulmn = 4
+        # Assuming rows = 4, coulmn = 4
         self.row = 4
         self.coulmn = 4
-        if (neighbourX <= self.row and neighbourX > 0 and  neighbourY <= self.coulmn and neighbourY > 0 ):
-            
+        if (neighbourX <= self.row and neighbourX > 0 and  neighbourY <= self.coulmn and neighbourY > 0 ):            
             return(1)  
 
     def findNeighbours(self, currentNode):
 
-        # Current node: ((neighbourX,neighbourX), distance)
-        curNode, distance = currentNode.split()
-        curNodeX = curNode[0]
-        curNodeY = curNode[1]
+        # Current node: (neighbourX, neighbourY, distance)
+        print(currentNode)
+        print(currentNode[0])
+        # curNode, distance =  currentNode[0]
+        # curNode = (2,3)
+        # distance = 8
+        curNodeX, curNodeY, distance = currentNode[0] 
         listH = list()
+
         #################################
         neighbourX = curNodeX + 1
         neighbourY = curNodeY         
         # find 1 hop neighbour 
         if(self.suitableNeighbour(neighbourX, neighbourY)):
-            listH.append((neighbourX,neighbourX), distance+1)
-            self.updateValMat(neighbourX, neighbourY,distance+1)
+            listH.append([neighbourX, neighbourY, distance+1])
+            # self.updateValMat(neighbourX, neighbourY,distance+1)
 
         #################################
         neighbourX = curNodeX - 1
         neighbourY = curNodeY
         # find 1 hop neighbour 
         if(self.suitableNeighbour(neighbourX, neighbourY)):
-            listH.append((neighbourX,neighbourX), distance+1)
-            self.updateValMat(neighbourX, neighbourY,distance+1)
+            listH.append([neighbourX, neighbourY, distance+1])
+            # self.updateValMat(neighbourX, neighbourY,distance+1)
 
         #################################
         neighbourX = curNodeX 
         neighbourY = curNodeY + 1        
         # find 1 hop neighbour 
         if(self.suitableNeighbour(neighbourX, neighbourY)):
-            listH.append((neighbourX,neighbourX), distance+1)
-            self.updateValMat(neighbourX, neighbourY,distance+1)
+            listH.append([neighbourX, neighbourY, distance+1])
+            # self.updateValMat(neighbourX, neighbourY,distance+1)
 
 
         #################################
@@ -88,12 +88,10 @@ class bfs_planner():
         neighbourY = curNodeY - 1
         # find 1 hop neighbour 
         if(self.suitableNeighbour(neighbourX, neighbourY)):
-            listH.append((neighbourX,neighbourX), distance+1)
-            self.updateValMat(neighbourX, neighbourY,distance+1)
+            listH.append([neighbourX, neighbourY, distance+1])
+            # self.updateValMat(neighbourX, neighbourY, distance+1)
 
-        return(list)
-
-
+        return(listH)
 
     def calc(self, currPos, val):
                 
@@ -137,6 +135,7 @@ class bfs_planner():
         print("later")
 
 if __name__ == "__main__":
+    
     example_maze = [[3, 2, 2, 1],
                 [1, 2, 1, 1],
                 [2, 2, 2, 2],
@@ -144,39 +143,66 @@ if __name__ == "__main__":
     
     # goalPos, startPos, initMaze
     pln = bfs_planner()
-    pln.init((1,4),(1,1), example_maze)    
-    
- 
+    pln.init((1,4),(1,1), example_maze)           
+    listK = list()
+
     if ( len(pln.neighbourQueue) > 0 ):
-        currentNode = pln.neighbourQueue[0] # current node: ((neighbourX,neighbourX), distance)
+        print("Do nothing")
     else:
-        currentNode = ((1,4),0)
         print("initial state")
-        
-    list = pln.findNeighbours(currentNode) 
-    pln.visitedQueue.append(currentNode)
-    pln.neighbourQueue.pop(0)
+        currentNode = [[1,4,0]]
 
-    for i in range(len(list)):
-        neighbour, distance = list[i].split()
-        neighbourX = neighbour[0] 
-        neighbourY = neighbour[1]
-        # pln.calc((1,4))
-        # neighbour queue : ((neighbourX,neighbourX), distance)
-        pln.neighbourQueue.append(((neighbourX,neighbourX), distance))
-        print(pln.neighbourQueue)
+        listK = pln.findNeighbours(currentNode) 
+        if (len(pln.visitedQueue) > 0):
+            pln.visitedQueue.append(currentNode)
+        else:
+            pln.visitedQueue = currentNode   
 
+        # Append all the list neghbour to neighbour queue.
+        for i in range(len(listK)):
 
+            pln.neighbourQueue.append(listK[i])
+            print("neighbour queue was updated now")
+            print(pln.neighbourQueue)
 
-
- 
-    if (len(neighbourQueue) > 0):
-        print("hj")
-
-    for i in range(len(neighbours)):
-        pln.calc((neighbours[i]))
-        # print(neighbours[i])      
     
-    # print(pln.neighbour)
+    # There needs to be a loop here.
+    
+    # Calculate current Node.    
+    for i in range(len(pln.neighbourQueue)):
+        if ( len(pln.neighbourQueue) > 0 ):
+            print("non-initial state")   
+            print(len(pln.neighbourQueue))         
+            curNodeX, curNodeY, distance = pln.neighbourQueue[0]
+            currentNode = [[curNodeX, curNodeY, distance]]
+            # if current node comes same as goal poae skip tha find neighbour step, as it will gen twice.
+            if (currentNode != [[1,4,0]]):
+                print(currentNode)
+                listK = pln.findNeighbours(currentNode) 
+                if (len(pln.visitedQueue) > 0):
+                    pln.visitedQueue.append(currentNode)
+                else:
+                    pln.visitedQueue = currentNode        
+            
+
+                #current node: (neighbourX, neighbourY, distance)
+                # Append all the list neghbour to neighbour queue.
+                for i in range(len(listK)):
+
+                    pln.neighbourQueue.append(listK[i])
+                    print("neighbour queue was updated now")
+                    print(pln.neighbourQueue)
+
+            neighbourX, neighbourY, distance = pln.neighbourQueue[0]
+            pln.updateValMat(neighbourX, neighbourY, distance+1)
+            print("neighbour queue before pop")
+            print(pln.neighbourQueue)
+            pln.neighbourQueue.pop(0)
+            print("neighbour queue after pop")
+            print(pln.neighbourQueue)
+
+
+    
+    print("debug the val matrix")
     print(pln.valMat)
         
