@@ -109,6 +109,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a5da88397b472a0badd30f9d3217aeae0" id="r_a5da88397b472a0badd30f9d3217aeae0"><td class="memItemLeft" align="right" valign="top"><a id="a5da88397b472a0badd30f9d3217aeae0" name="a5da88397b472a0badd30f9d3217aeae0"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>num_nodes</b></td></tr>
 <tr class="separator:a5da88397b472a0badd30f9d3217aeae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08cc814ad3a49978ee2dc256ae44b59a" id="r_a08cc814ad3a49978ee2dc256ae44b59a"><td class="memItemLeft" align="right" valign="top"><a id="a08cc814ad3a49978ee2dc256ae44b59a" name="a08cc814ad3a49978ee2dc256ae44b59a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>start_node_index</b></td></tr>
+<tr class="separator:a08cc814ad3a49978ee2dc256ae44b59a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a696e2cf3624c2dc7d3577231f1076d49" id="r_a696e2cf3624c2dc7d3577231f1076d49"><td class="memItemLeft" align="right" valign="top"><a id="a696e2cf3624c2dc7d3577231f1076d49" name="a696e2cf3624c2dc7d3577231f1076d49"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>goal_node_index</b></td></tr>
+<tr class="separator:a696e2cf3624c2dc7d3577231f1076d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4a28958f51feae446e5262ab3e86d9f" id="r_af4a28958f51feae446e5262ab3e86d9f"><td class="memItemLeft" align="right" valign="top"><a id="af4a28958f51feae446e5262ab3e86d9f" name="af4a28958f51feae446e5262ab3e86d9f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>nodes</b></td></tr>
 <tr class="separator:af4a28958f51feae446e5262ab3e86d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -118,12 +124,6 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a0c33b796785ff8932cc111b6409feced" id="r_a0c33b796785ff8932cc111b6409feced"><td class="memItemLeft" align="right" valign="top"><a id="a0c33b796785ff8932cc111b6409feced" name="a0c33b796785ff8932cc111b6409feced"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>init_node_to_be_wall_posibility</b></td></tr>
 <tr class="separator:a0c33b796785ff8932cc111b6409feced"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08cc814ad3a49978ee2dc256ae44b59a" id="r_a08cc814ad3a49978ee2dc256ae44b59a"><td class="memItemLeft" align="right" valign="top"><a id="a08cc814ad3a49978ee2dc256ae44b59a" name="a08cc814ad3a49978ee2dc256ae44b59a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>start_node_index</b></td></tr>
-<tr class="separator:a08cc814ad3a49978ee2dc256ae44b59a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a696e2cf3624c2dc7d3577231f1076d49" id="r_a696e2cf3624c2dc7d3577231f1076d49"><td class="memItemLeft" align="right" valign="top"><a id="a696e2cf3624c2dc7d3577231f1076d49" name="a696e2cf3624c2dc7d3577231f1076d49"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>goal_node_index</b></td></tr>
-<tr class="separator:a696e2cf3624c2dc7d3577231f1076d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -134,7 +134,16 @@ Protected Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>_generate_random_position_within_matrix</b> (self)</td></tr>
 <tr class="separator:ac109c9ff7a07686c0511846742867fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><pre class="fragment">Pre-defined Graph Node data structure.
+
+Attributes:
+    self.num_rows: The number of rows in this 2D matrix maze
+    self.num_columns = The number of columns in this 2D matrix maze
+    self.num_nodes = The number of grapgh nodes in this 2D matrix maze
+    self.state = The node's state for visualizing
+    self.score The node's score for finding the shortest path
+</pre> </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/<b>maze.py</b></li>
 </ul>
 </div><!-- contents -->
