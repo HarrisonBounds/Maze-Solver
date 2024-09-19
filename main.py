@@ -1,5 +1,6 @@
-from maze import Maze
-from new import MazeSolver
+from harrison.maze_solver import MazeSolver
+from src.maze import Maze
+
 
 rows = int(input("How many rows do you want the maze to have?: "))
 cols = int(input("How many columns do you want the maze to have?: "))

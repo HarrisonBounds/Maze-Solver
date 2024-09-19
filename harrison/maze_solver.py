@@ -1,5 +1,5 @@
 import json
-from maze_visualizer import MazeVisualizer
+from src.maze_visualizer import MazeVisualizer
 import numpy as np
 from collections import deque
 

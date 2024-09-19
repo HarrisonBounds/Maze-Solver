@@ -1,5 +1,5 @@
-from data_structure import GraphNode
-from state_define import *
+from src.data_structure import GraphNode
+from src.state_define import *
 import numpy as np
 import random
 
