@@ -3,7 +3,7 @@ from maze_visualizer import MazeVisualizer
 import numpy as np
 from collections import deque
 
-class BFSSolver:
+class MazeSolver:
     def __init__(self, maze):
         self.maze = maze
         
@@ -46,6 +46,7 @@ class BFSSolver:
         for direction in self.directions:
             new_x = direction[0]+x
             new_y = direction[1]+y
+            
             if self.found_goal and self.isValid(x, y):
                 neighbors.append((direction[0]+x, direction[1]+y))
             elif not self.found_goal and self.isValid(x, y) and (new_x, new_y) not in self.visited: 
@@ -55,28 +56,25 @@ class BFSSolver:
     
     def findShortestPath(self, end, start):
         current = end
-        next_node = None
-        print("Path: ", self.path)
-        
+        next_node = None  
+              
         while not np.array_equal(current, start):
             min = np.inf
             neighbors = self.getNeighbors(current)
             
             for nx, ny in neighbors:
-                print("nx, ny", (nx, ny))
                 if (nx, ny) in self.path and self.path[(nx, ny)] < min:
                         min = self.path[(nx, ny)]
                         next_node = (nx, ny)
                         
             current = next_node
-            print("current node:", current)
             self.maze[current[0]][current[1]] = 3
             
             self.visualizer.display_single_state(self.maze, interval=0.1)
             
         return True
         
-    def solver(self, maze):
+    def bfs(self, maze):
         start = self.findStart(maze)
         current = start
         
@@ -97,6 +95,7 @@ class BFSSolver:
                     if self.maze[nx][ny] == self.goal:
                         self.found_goal = True
                         self.findShortestPath((nx, ny), start)
+                        return True
                         
                     self.visited.add((nx, ny))
                     queue.append((nx, ny))
@@ -106,6 +105,41 @@ class BFSSolver:
             if self.counter % 20 == 0:  
                 self.visualizer.display_single_state(self.maze, interval=0.01)
             self.counter += 1
+            
+        return False
+    
+    def dfs(self, maze):
+        start = self.findStart(maze)
+        stack = [start]
+        self.path[start] = self.counter
+        self.counter += 1 
+              
+        while stack:
+            #Use a stack to get the current position by popping
+            current = stack.pop()
+            x, y = current[0], current[1]
+            
+            if current not in self.visited:
+                self.visited.add(current)
+                
+            if maze[x][y] == self.goal:
+                self.found_goal = True
+                self.findShortestPath((nx, ny), start)
+                return True
+            
+            for direction in self.directions:
+                nx = current[0] + direction[0]
+                ny = current[1] + direction[1]
+
+                if (nx, ny) not in self.visited and self.isValid(nx, ny):                        
+                    stack.append((nx, ny))
+                    self.path[(x, y)] = self.counter
+                    if self.maze[x][y] != self.start:
+                        self.maze[x][y] = 7
+
+                        
+            self.counter += 1          
+            self.visualizer.display_single_state(np.matrix(self.maze), interval=0.01)
             
         return False
     
