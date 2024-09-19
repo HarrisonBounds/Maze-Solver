@@ -1,5 +1,5 @@
 from maze import Maze
-from algorithms import Maze_Solver
+from new import BFSSolver
 
 rows = int(input("How many rows do you want the maze to have?: "))
 cols = int(input("How many columns do you want the maze to have?: "))
@@ -9,9 +9,9 @@ maze = Maze(rows, cols)
 maze.init_random_maze_map()
 maze = maze.as_matrix()
 
-solver = Maze_Solver(maze, rows, cols)
+solver = BFSSolver(maze)
 
 if choice == 1:
-    solver.bfs(maze)
+    solver.solver(maze)
 if choice == 2:
     solver.dfs(maze)
